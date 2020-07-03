@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".fragments.location.LocationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:orientation="vertical"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_hotel_offers" />
+            tools:listitem="@layout/item_locations" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -48,47 +48,35 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="@string/location"
+            app:titleTextColor="@android:color/white" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/destination_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_marginTop="8dp"
+            android:hint="@string/search_location"
+            app:layout_constraintTop_toBottomOf="@id/date_picker">
 
-            <Button
-                android:id="@+id/date_picker"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/destination_auto_complete"
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/date_arrival"
-                app:icon="@drawable/ic_today"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/destination_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/edit_destination"
-                app:layout_constraintTop_toBottomOf="@id/date_picker">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/destination_auto_complete"
-                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

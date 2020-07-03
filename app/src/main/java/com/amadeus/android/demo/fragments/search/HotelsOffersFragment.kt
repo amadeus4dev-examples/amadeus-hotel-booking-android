@@ -8,17 +8,23 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.amadeus.android.demo.R
 import com.amadeus.android.demo.databinding.FragmentHotelsOffersBinding
 import com.amadeus.android.demo.mainActivity
+import com.amadeus.android.demo.utils.gone
 import com.amadeus.android.demo.utils.hideKeyboard
+import com.amadeus.android.demo.utils.visible
+import com.amadeus.android.demo.utils.visibleOrGone
+import com.amadeus.android.domain.resources.Location
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
+import timber.log.Timber
 
 
 class HotelsOffersFragment : Fragment(R.layout.fragment_hotels_offers) {
@@ -90,7 +96,9 @@ class HotelsOffersFragment : Fragment(R.layout.fragment_hotels_offers) {
 
     private fun subscribe() {
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-            binding.noDataText.gone(true)
+            if (isLoading) {
+                binding.noDataText.gone(true)
+            }
             binding.progressBar.visibleOrGone(isLoading, true)
         }
         viewModel.error.observe(viewLifecycleOwner) { message ->
@@ -104,11 +112,23 @@ class HotelsOffersFragment : Fragment(R.layout.fragment_hotels_offers) {
             binding.recyclerView.visible(true)
             binding.noDataText.gone(true)
         }
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Location>(LOCATION_RESULT_KEY)
+            ?.observe(viewLifecycleOwner) { location ->
+                // Do something with the result.
+                Timber.d("$location")
+            }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding.recyclerView.adapter = null
+    }
+
+    companion object {
+        const val LOCATION_RESULT_KEY = "location_result"
     }
 
 }
