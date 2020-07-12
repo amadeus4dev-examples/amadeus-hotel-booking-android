@@ -10,4 +10,10 @@
         android:name="com.amadeus.android.demo.fragments.search.HotelsOffersFragment"
         android:label="HotelsOffersFragment"
         tools:layout="@layout/fragment_hotels_offers" />
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.amadeus.android.demo.fragments.location.LocationFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location" />
 </navigation>

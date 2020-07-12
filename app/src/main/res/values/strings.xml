@@ -4,4 +4,5 @@
     <string name="search_location">Search</string>
     <string name="location">Location</string>
     <string name="date_arrival">select dates</string>
+    <string name="select_location">select destination</string>
 </resources>

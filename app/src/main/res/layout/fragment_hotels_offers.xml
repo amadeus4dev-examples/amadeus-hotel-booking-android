@@ -56,39 +56,26 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <Button
+            android:id="@+id/date_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:text="@string/date_arrival"
+            app:icon="@drawable/ic_today" />
 
-            <Button
-                android:id="@+id/date_picker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/date_arrival"
-                app:icon="@drawable/ic_today"
-                app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/location_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_location"
+            app:icon="@drawable/ic_location_city" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/destination_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/edit_destination"
-                app:layout_constraintTop_toBottomOf="@id/date_picker">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/destination_auto_complete"
-                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_location"
+            app:icon="@drawable/ic_search" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

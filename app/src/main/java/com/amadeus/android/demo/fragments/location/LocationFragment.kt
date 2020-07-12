@@ -1,6 +1,7 @@
 package com.amadeus.android.demo.fragments.location
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
@@ -42,8 +43,8 @@ class LocationFragment : Fragment(
             setSupportActionBar(binding.toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        binding.destinationInput.editText?.setOnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+        binding.destinationInput.editText?.setOnEditorActionListener { v, actionId, keyCode ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || KeyEvent.KEYCODE_ENTER == keyCode.keyCode) {
                 viewModel.searchLocations(
                     v.text.toString()
                 )
