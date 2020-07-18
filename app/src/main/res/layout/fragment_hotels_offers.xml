@@ -60,6 +60,7 @@
             android:id="@+id/date_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             android:text="@string/date_arrival"
             app:icon="@drawable/ic_today" />
 
@@ -67,6 +68,7 @@
             android:id="@+id/location_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             android:text="@string/select_location"
             app:icon="@drawable/ic_location_city" />
 
@@ -74,6 +76,7 @@
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             android:text="@string/search_location"
             app:icon="@drawable/ic_search" />
 

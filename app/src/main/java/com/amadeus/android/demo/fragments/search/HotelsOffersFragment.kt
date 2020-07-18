@@ -91,6 +91,9 @@ class HotelsOffersFragment : Fragment(R.layout.fragment_hotels_offers) {
                 .currentBackStackEntry
                 ?.savedStateHandle
                 ?.apply {
+                    it.isEnabled = false
+                    binding.datePicker.isEnabled = false
+                    binding.locationPicker.isEnabled = false
                     val location = getLiveData<Location>(LOCATION_RESULT_KEY).value
                     val dates = getLiveData<Pair<LocalDate, LocalDate>>(PAIR_DATE_RESULT_KEY).value
                     if (location != null && dates != null) {
@@ -106,6 +109,9 @@ class HotelsOffersFragment : Fragment(R.layout.fragment_hotels_offers) {
                 binding.noDataText.gone(true)
             }
             binding.progressBar.visibleOrGone(isLoading, true)
+            binding.search.isEnabled = !isLoading
+            binding.datePicker.isEnabled = !isLoading
+            binding.locationPicker.isEnabled = !isLoading
         }
         viewModel.error.observe(viewLifecycleOwner) { message ->
             binding.noDataText.text = message
