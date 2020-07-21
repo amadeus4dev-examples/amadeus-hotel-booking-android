@@ -50,6 +50,7 @@ class HotelsOffersAdapter(
 
         override fun bind(element: HotelOffer?) {
             element?.let { hotelOffer ->
+                itemView.setOnClickListener { viewModel.onHotelOfferClick(it, hotelOffer) }
                 binding.hotelTitle.text = hotelOffer.hotel?.name
                 hotelOffer.hotel?.address?.let { address ->
                     val builder = StringBuilder()

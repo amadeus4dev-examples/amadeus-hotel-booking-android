@@ -12,6 +12,22 @@
         tools:layout="@layout/fragment_hotels_offers" />
 
     <fragment
+        android:id="@+id/ratesFragment"
+        android:name="com.amadeus.android.demo.fragments.rates.RatesFragment"
+        android:label="RatesFragment"
+        tools:layout="@layout/fragment_rates">
+        <argument
+            android:name="hotelId"
+            app:argType="string" />
+        <argument
+            android:name="checkInDate"
+            app:argType="string" />
+        <argument
+            android:name="checkOutDate"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/locationFragment"
         android:name="com.amadeus.android.demo.fragments.location.LocationFragment"
         android:label="LocationFragment"
