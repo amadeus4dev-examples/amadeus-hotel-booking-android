@@ -1,9 +1,6 @@
 package com.amadeus.android.demo.fragments.rates
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.amadeus.android.ApiResult.Success
 import com.amadeus.android.demo.SampleApplication
 import com.amadeus.android.demo.utils.SingleLiveEvent
@@ -43,6 +40,17 @@ class RatesViewModel(
                 }
             }
             _loading.value = false
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory(
+        private val hotelId: String,
+        private val checkInDate: String,
+        private val checkOutDate: String
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return RatesViewModel(hotelId, checkInDate, checkOutDate) as T
         }
     }
 

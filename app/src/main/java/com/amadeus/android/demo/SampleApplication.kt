@@ -3,6 +3,7 @@ package com.amadeus.android.demo
 import android.app.Application
 import com.amadeus.android.Amadeus
 import com.jakewharton.threetenabp.AndroidThreeTen
+import timber.log.Timber
 
 class SampleApplication: Application() {
 
@@ -16,6 +17,9 @@ class SampleApplication: Application() {
             .setLogLevel(Amadeus.Builder.LogLevel.BODY)
             .setHostName(Amadeus.Builder.Hosts.TEST)
             .build()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     companion object {
