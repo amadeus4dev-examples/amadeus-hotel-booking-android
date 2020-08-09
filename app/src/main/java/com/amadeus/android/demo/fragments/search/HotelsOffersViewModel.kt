@@ -84,7 +84,9 @@ class HotelsOffersViewModel : ViewModel() {
                     is Success -> {
                         if (next.data.isNotEmpty()) {
                             latestResult = next
-                            val newList = ArrayList(_hotelOffers.value.orEmpty())
+                            val newList = ArrayList(
+                                _hotelOffers.value.orEmpty()
+                                    .filter { element -> element.type == DisplayableElement.Type.ELEMENT })
                             newList.addAll(next.data.map { hotelOffer ->
                                 DisplayableElement.from(
                                     hotelOffer
@@ -111,7 +113,8 @@ class HotelsOffersViewModel : ViewModel() {
                 RatesFragmentArgs(
                     hotelOffer.hotel?.hotelId ?: "",
                     checkInDate,
-                    checkOutDate).toBundle()
+                    checkOutDate
+                ).toBundle()
             )
         } catch (e: Exception) {
             Timber.e(e)
