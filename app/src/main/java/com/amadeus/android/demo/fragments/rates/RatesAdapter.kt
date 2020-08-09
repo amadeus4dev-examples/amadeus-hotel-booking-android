@@ -48,7 +48,7 @@ class RatesAdapter(
                 .append(offer.price?.currency)
             binding.price.text = priceText.toString()
             binding.root.setOnClickListener { view ->
-
+                viewModel.onHotelOfferCLick(view, offer)
             }
         }
     }

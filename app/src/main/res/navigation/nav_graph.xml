@@ -28,6 +28,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/priceFragment"
+        android:name="com.amadeus.android.demo.fragments.price.PriceFragment"
+        android:label="PriceFragment"
+        tools:layout="@layout/fragment_price">
+        <argument
+            android:name="offerId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/locationFragment"
         android:name="com.amadeus.android.demo.fragments.location.LocationFragment"
         android:label="LocationFragment"

@@ -1,11 +1,16 @@
 package com.amadeus.android.demo.fragments.rates
 
+import android.view.View
 import androidx.lifecycle.*
+import androidx.navigation.findNavController
 import com.amadeus.android.ApiResult.Success
+import com.amadeus.android.demo.R
 import com.amadeus.android.demo.SampleApplication
+import com.amadeus.android.demo.fragments.price.PriceFragmentArgs
 import com.amadeus.android.demo.utils.SingleLiveEvent
 import com.amadeus.android.domain.resources.HotelOffer
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class RatesViewModel(
     private val hotelId: String,
@@ -40,6 +45,19 @@ class RatesViewModel(
                 }
             }
             _loading.value = false
+        }
+    }
+
+    fun onHotelOfferCLick(view: View, offer: HotelOffer.Offer) {
+        try {
+            view.findNavController().navigate(
+                R.id.priceFragment,
+                PriceFragmentArgs(
+                    offer.id ?: ""
+                ).toBundle()
+            )
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }
 
