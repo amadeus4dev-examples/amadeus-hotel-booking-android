@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.amadeus.android.ApiResult.Success
 import com.amadeus.android.demo.SampleApplication
 import com.amadeus.android.demo.utils.SingleLiveEvent
+import com.amadeus.android.domain.resources.HotelBooking
 import com.amadeus.android.domain.resources.HotelOffer
 import kotlinx.coroutines.launch
 
@@ -21,7 +22,18 @@ class PriceViewModel(
 
     val error = SingleLiveEvent<String>()
 
-    val bookingResult = SingleLiveEvent<String>()
+    val bookingResult = SingleLiveEvent<HotelBooking?>()
+
+    val payments = arrayOf(
+        mapOf(
+            "method" to "creditCard",
+            "card" to mapOf(
+                "vendorCode" to "VI",
+                "cardNumber" to "4111111111111111",
+                "expiryDate" to "2023-01"
+            )
+        )
+    )
 
     init {
         fetchPrice()
@@ -31,8 +43,7 @@ class PriceViewModel(
         viewModelScope.launch {
             _loading.value = true
             val amadeus = SampleApplication.amadeus
-            when (val result =
-                amadeus.shopping.hotelOffer(offerId).get()) {
+            when (val result = amadeus.shopping.hotelOffer(offerId).get()) {
                 is Success -> {
                     _hotelOffer.value = result.data
                 }
@@ -43,42 +54,36 @@ class PriceViewModel(
         }
     }
 
-    fun postHotelBooking() {
+    fun postHotelBooking(
+        firstName: String,
+        lastName: String,
+        phone: String,
+        email: String
+    ) {
         viewModelScope.launch {
             _loading.value = true
             val amadeus = SampleApplication.amadeus
-            // Fake user
             val name = mapOf(
-                "firstName" to "John",
-                "lastName" to "Doe"
+                "firstName" to firstName,
+                "lastName" to lastName
             )
             val contact = mapOf(
-                "phone" to "+33679278416",
-                "email" to "john.doe@email.com"
-            )
-            val payments = arrayOf(
-                mapOf(
-                    "method" to "creditCard",
-                    "card" to mapOf(
-                        "vendorCode" to "VI",
-                        "cardNumber" to "4111111111111111",
-                        "expiryDate" to "2023-01"
-                    )
-                )
+                "phone" to phone,
+                "email" to email
             )
             val hotelBookingQuery = mapOf<String, Any>(
                 "offerId" to offerId,
                 "guests" to arrayOf(
                     mapOf(
                         "name" to name,
-                        "contact" to contact,
-                        "payments" to payments
+                        "contact" to contact
                     )
-                )
+                ),
+                "payments" to payments
             )
-            when (amadeus.booking.hotelBooking.post(mapOf("data" to hotelBookingQuery))) {
-                is Success -> bookingResult.value = "Booking accepted."
-                else -> bookingResult.value = "Error with your booking."
+            when (val result = amadeus.booking.hotelBooking.post(mapOf("data" to hotelBookingQuery))) {
+                is Success -> bookingResult.value = result.data.firstOrNull()
+                else -> error.value = "Error with your booking."
             }
             _loading.value = false
         }

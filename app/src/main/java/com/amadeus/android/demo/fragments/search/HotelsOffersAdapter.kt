@@ -59,7 +59,10 @@ class HotelsOffersAdapter(
                     address.cityName?.let { builder.append(" $it") }
                     binding.hotelAddress.text = builder.toString()
                 }
-                binding.offersCount.text = hotelOffer.offers?.size.toString()
+                val builder = StringBuilder(hotelOffer.offers?.firstOrNull()?.price?.total ?: "")
+                    .append(" ")
+                    .append(hotelOffer.offers?.firstOrNull()?.price?.currency ?: "")
+                binding.offersCount.text = builder.toString()
             }
         }
     }

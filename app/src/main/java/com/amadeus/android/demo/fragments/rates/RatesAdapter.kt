@@ -7,12 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.amadeus.android.demo.R
-import com.amadeus.android.demo.databinding.ItemLocationsBinding
 import com.amadeus.android.demo.databinding.ItemOfferBinding
-import com.amadeus.android.demo.fragments.location.LocationsAdapter.LocationsViewHolder
 import com.amadeus.android.domain.resources.HotelOffer
-import com.amadeus.android.domain.resources.Location
-import kotlinx.android.synthetic.main.item_offer.view.*
 
 class RatesAdapter(
     val viewModel: RatesViewModel
@@ -38,14 +34,20 @@ class RatesAdapter(
         private val binding = ItemOfferBinding.bind(itemView)
 
         fun bind(offer: HotelOffer.Offer) {
-            val roomDesc = StringBuilder().append(offer.room?.typeEstimated?.category ?: "_")
+            val roomDesc = StringBuilder().append(offer.room?.typeEstimated?.category ?: "")
                 .append(" - ")
-                .append(offer.room?.typeEstimated?.bedType ?: "_")
+                .append(offer.room?.typeEstimated?.bedType ?: "")
             binding.roomType.text = roomDesc.toString()
             binding.description.text = offer.room?.description?.text ?: "No description"
             val priceText = StringBuilder().append(offer.price?.total ?: "0")
                 .append(" ")
                 .append(offer.price?.currency)
+            offer.policies?.cancellation?.description?.text?.let {
+                priceText.append("\n $it")
+            }
+            offer.boardType?.let {
+                priceText.append("\n $it")
+            }
             binding.price.text = priceText.toString()
             binding.root.setOnClickListener { view ->
                 viewModel.onHotelOfferCLick(view, offer)
@@ -54,11 +56,17 @@ class RatesAdapter(
     }
 
     class OfferDiffCallback : DiffUtil.ItemCallback<HotelOffer.Offer>() {
-        override fun areItemsTheSame(oldItem: HotelOffer.Offer, newItem: HotelOffer.Offer): Boolean {
+        override fun areItemsTheSame(
+            oldItem: HotelOffer.Offer,
+            newItem: HotelOffer.Offer
+        ): Boolean {
             return oldItem.id != newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: HotelOffer.Offer, newItem: HotelOffer.Offer): Boolean {
+        override fun areContentsTheSame(
+            oldItem: HotelOffer.Offer,
+            newItem: HotelOffer.Offer
+        ): Boolean {
             return oldItem != newItem
         }
 
