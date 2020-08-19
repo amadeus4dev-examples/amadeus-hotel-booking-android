@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.amadeus.android.demo.R
 import com.amadeus.android.demo.databinding.FragmentPriceBinding
 import com.amadeus.android.demo.mainActivity
+import com.amadeus.android.demo.utils.gone
 import com.amadeus.android.demo.utils.visible
 import com.amadeus.android.demo.utils.visibleOrGone
 import com.google.android.material.snackbar.Snackbar
@@ -79,14 +80,6 @@ class PriceFragment : Fragment(R.layout.fragment_price) {
                 )
             }
         }
-        val builder = StringBuilder("PAYMENT\n\n")
-        viewModel.payments.firstOrNull()?.entries?.forEach {
-            builder.append(it.key)
-                .append(": ")
-                .append(it.value)
-                .append("\n")
-        }
-        binding.payment.text = builder.toString()
     }
 
     private fun subscribe() {
@@ -94,10 +87,24 @@ class PriceFragment : Fragment(R.layout.fragment_price) {
         viewModel.hotelOffer.observe(viewLifecycleOwner) { hotelOffer ->
             binding.book.visible()
             binding.toolbar.title = hotelOffer.hotel?.name ?: "Hotel"
+            val builder = StringBuilder("PAYMENT - ")
+            hotelOffer.offers?.firstOrNull()?.let { offer ->
+                builder.append(offer.price?.total ?: "X")
+                    .append(" ")
+                    .append(offer.price?.currency)
+                    .append("\n\n")
+            }
+            viewModel.payments.firstOrNull()?.entries?.forEach {
+                builder.append(it.key)
+                    .append(": ")
+                    .append(it.value)
+                    .append("\n")
+            }
+            binding.payment.text = builder.toString()
         }
         viewModel.bookingResult.observe(viewLifecycleOwner) {
             it?.let {
-                binding.book.isEnabled = false
+                binding.book.gone()
                 binding.payment.append("\n\nBooking id: ${it.id}")
                 Snackbar.make(binding.root, "Booking completed.", Snackbar.LENGTH_SHORT).show()
             }

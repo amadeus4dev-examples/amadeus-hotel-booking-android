@@ -10,8 +10,8 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/first_name_input"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="2dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -22,19 +22,27 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:id="@+id/payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"
+        tools:text="PAYMENT" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/first_name_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
         android:hint="@string/first_name"
         android:textColorHint="@color/colorPrimary"
         app:boxStrokeColor="@color/colorPrimary"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/last_name_input"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+        app:layout_constraintTop_toBottomOf="@id/payment"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="59dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/first_name_edit"
@@ -53,13 +61,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
         android:hint="@string/last_name"
         android:textColorHint="@color/colorPrimary"
         app:boxStrokeColor="@color/colorPrimary"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/phone_input"
-        app:layout_constraintTop_toBottomOf="@+id/first_name_input">
+        app:layout_constraintTop_toBottomOf="@id/first_name_input"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="143dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/last_name_edit"
@@ -78,13 +86,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
         android:hint="@string/phone"
         android:textColorHint="@color/colorPrimary"
         app:boxStrokeColor="@color/colorPrimary"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/email_input"
-        app:layout_constraintTop_toBottomOf="@+id/last_name_input">
+        app:layout_constraintTop_toBottomOf="@id/last_name_input"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="226dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_edit"
@@ -103,13 +111,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
         android:hint="@string/email"
         android:textColorHint="@color/colorPrimary"
         app:boxStrokeColor="@color/colorPrimary"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/payment"
-        app:layout_constraintTop_toBottomOf="@+id/phone_input">
+        app:layout_constraintTop_toBottomOf="@id/phone_input"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="310dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_edit"
@@ -121,14 +129,6 @@
             android:textColor="@android:color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/payment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/email_input"
-        tools:text="PAYMENT" />
 
     <Button
         android:id="@+id/book"
