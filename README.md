@@ -4,8 +4,11 @@
 
 ## License
 
-This library is released under the MIT License.
+This library is released under the [MIT License](LICENSE).
 
 ## Help
 
-Our developer support team is here to help you. You can find us on StackOverflow and email.
+Our [developer support team](https://developers.amadeus.com/support) is here
+to help you. You can find us on
+[StackOverflow](https://stackoverflow.com/questions/tagged/amadeus) and
+[email](mailto:developers@amadeus.com).
