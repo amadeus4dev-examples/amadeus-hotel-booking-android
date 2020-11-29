@@ -31,3 +31,5 @@ amadeus.api.secret="XXXXXXXXXXXXXXX"
 * Install latest [Android Studio version](https://developer.android.com/studio)
 * Open project root folder build.gradle with Android Studio `File > Open`
 * Once your credentials are setup, click `Run` green arrow.
+
+For more details about the project, check out the official [article](https://developers.amadeus.com/blog/android-hotel-booking-app-tutorial).
